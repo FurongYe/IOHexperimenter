@@ -433,17 +433,24 @@ struct GSEMO
                             best_pm = pmNew[lambda - 1];
                         }
                     }
+                    if (best_pm >= 0.5) best_pm = 0.5
+                    if (best_pm < (0.25 / problem->meta_data().n_variables)) best_pm = (0.25 / problem->meta_data().n_variables)
                     r = best_pm * problem->meta_data().n_variables;
-                }
+                    }
                 else if (algorithm_name == "varctrl")
                 {
                     r = best_key;
+                    if (r >= 0.5) r = 0.5
+                    if (r < (0.25 / problem->meta_data().n_variables)) r = (0.25 / problem->meta_data().n_variables)
+                
                     if(find_better) ++c;
                     else c = 1;
                 }
                 else if (algorithm_name == "logNormal")
                 {
                     pm_star = best_key;
+                    if (pm_star >= 0.5) pm_star = 0.5
+                    if (pm_star < (0.25 / problem->meta_data().n_variables)) pm_star = (0.25 / problem->meta_data().n_variables)
                 }
             }
 
